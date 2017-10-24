@@ -223,6 +223,21 @@ namespace snemo {
       /// Shortcut for the smart print method
       void dump() const;
 
+        // new functions
+        double get_top_time() const;
+        double get_sigma_top_time() const;
+        double get_bottom_time() const;
+        double get_sigma_bottom_time() const;
+        double get_anode_time_actual() const;
+        double get_sigma_anode_time_actual() const;
+        
+        void set_top_time(const double);
+        void set_sigma_top_time(const double);
+        void set_bottom_time(const double);
+        void set_sigma_bottom_time(const double);
+        void set_anode_time_actual(const double);
+        void set_sigma_anode_time_actual(const double);
+
     protected:
 
       /// Set the X position of the center of the cell in the module coordinates system
@@ -246,6 +261,14 @@ namespace snemo {
       double   _y_;       //!< Y position of the anode wire within the module coordinates system
       double   _delayed_time_;       //!< Delayed reference time
       double   _delayed_time_error_; //!< Delayed reference time error
+
+        // new variables
+        double _top_time_;
+        double _sigma_top_time_;
+        double _bottom_time_;
+        double _sigma_bottom_time_;
+        double _anode_time_;
+        double _sigma_anode_time_;
 
       DATATOOLS_SERIALIZATION_DECLARATION()
 

@@ -300,6 +300,14 @@ namespace snemo {
       datatools::invalidate(_y_);
       datatools::invalidate(_delayed_time_);
       datatools::invalidate(_delayed_time_error_);
+      
+      // new code
+      datatools::invalidate(_top_time_);
+      datatools::invalidate(_sigma_top_time_);
+      datatools::invalidate(_bottom_time_);
+      datatools::invalidate(_sigma_bottom_time_);
+      datatools::invalidate(_anode_time_);
+      datatools::invalidate(_sigma_anode_time_);
       return;
     }
 
@@ -413,6 +421,65 @@ namespace snemo {
     {
       tree_dump(std::clog, "snemo::core::model::calibrated_tracker_hit");
       return;
+    }
+
+    // new functions
+    double calibrated_tracker_hit::get_top_time() const
+    {
+        return _top_time_;
+    }
+    double calibrated_tracker_hit::get_sigma_top_time() const
+    {
+        return _sigma_top_time_;
+    }
+    double calibrated_tracker_hit::get_bottom_time() const
+    {
+        return _bottom_time_;
+    }
+    double calibrated_tracker_hit::get_sigma_bottom_time() const
+    {
+        return _sigma_bottom_time_;
+    }
+    double calibrated_tracker_hit::get_anode_time_actual() const
+    {
+        return _anode_time_;
+    }
+    double calibrated_tracker_hit::get_sigma_anode_time_actual() const
+    {
+        return _sigma_anode_time_;
+    }
+    
+    void calibrated_tracker_hit::set_top_time(const double top_time_)
+    {
+        _top_time_ = top_time_;
+    }
+    void calibrated_tracker_hit::set_sigma_top_time(const double sigma_top_time_)
+    {
+        _sigma_top_time_ = sigma_top_time_;
+    }
+    void calibrated_tracker_hit::set_bottom_time(const double bottom_time_)
+    {
+        _bottom_time_ = bottom_time_;
+    }
+    void calibrated_tracker_hit::set_sigma_bottom_time(const double sigma_bottom_time_)
+    {
+        _sigma_bottom_time_ = sigma_bottom_time_;
+    }
+    //void calibrated_tracker_hit::set_anode_time(const double anode_time_)
+    //{
+    //    _anode_time_ = anode_time_;
+    //}
+    //void calibrated_tracker_hit::set_sigma_anode_time(const double sigma_anode_time_)
+    //{
+    //    _sigma_anodes_time_ = sigma_anode_time_;
+    //}
+    void calibrated_tracker_hit::set_anode_time_actual(const double anode_time_)
+    {
+        _anode_time_ = anode_time_;
+    }
+    void calibrated_tracker_hit::set_sigma_anode_time_actual(const double sigma_anode_time_)
+    {
+        _sigma_anode_time_ = sigma_anode_time_;
     }
 
     int32_t calibrated_tracker_hit::get_id() const

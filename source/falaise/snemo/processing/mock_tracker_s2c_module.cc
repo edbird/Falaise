@@ -702,6 +702,14 @@ namespace snemo {
           }
         }
 
+        // set cathode times and sigma cathode times
+        the_calibrated_tracker_hit.set_top_time(the_raw_tracker_hit.get_top_time());
+        the_calibrated_tracker_hit.set_sigma_top_time(the_raw_tracker_hit.get_sigma_top_time());
+        the_calibrated_tracker_hit.set_bottom_time(the_raw_tracker_hit.get_bottom_time());
+        the_calibrated_tracker_hit.set_sigma_bottom_time(the_raw_tracker_hit.get_sigma_bottom_time());
+        the_calibrated_tracker_hit.set_anode_time_actual(the_raw_tracker_hit.get_drift_time());
+        the_calibrated_tracker_hit.set_sigma_anode_time_actual(the_raw_tracker_hit.get_sigma_drift_time());
+
         // save the calibrate tracker hit:
         calibrated_tracker_hits_.push_back(the_hit_handle);
 
