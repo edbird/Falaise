@@ -61,7 +61,7 @@ namespace snemo {
         ar_ & boost::serialization::make_nvp("bottom_time", _bottom_time_);
         ar_ & boost::serialization::make_nvp("sigma_bottom_time", _sigma_bottom_time_);
         ar_ & boost::serialization::make_nvp("anode_time", _bottom_time_);
-        ar_ & boost::serialization::make_nvp("sigma_anode_time", _sigma_bottom_time_
+        ar_ & boost::serialization::make_nvp("sigma_anode_time", _sigma_bottom_time_);
       if (has_xy()) {
         ar_ & boost::serialization::make_nvp("x", _x_);
         ar_ & boost::serialization::make_nvp("y", _y_);
