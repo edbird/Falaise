@@ -219,13 +219,13 @@ public:
     /// Shortcut for the smart print method
     void dump() const;
 
-    double get_anode_time() const;
+    double get_anode_time2() const;
     
-    void set_anode_time(const double value);
+    void set_anode_time2(const double value);
     
-    double get_sigma_anode_time() const;    
+    double get_sigma_anode_time2() const;    
     
-    void set_sigma_anode_time(const double value);
+    void set_sigma_anode_time2(const double value);
 
     double get_top_cathode_time() const;
     

@@ -232,20 +232,20 @@ void calibrated_tracker_hit::set_sigma_r(double sigma_r_) {
     return;
 }
 
-double calibrated_tracker_hit::get_anode_time() const {
+double calibrated_tracker_hit::get_anode_time2() const {
     return _anode_time_;
 }
 
-void calibrated_tracker_hit::set_anode_time(const double value) {
+void calibrated_tracker_hit::set_anode_time2(const double value) {
     _anode_time_ = value;
     return;
 }
 
-double calibrated_tracker_hit::get_sigma_anode_time() const {
+double calibrated_tracker_hit::get_sigma_anode_time2() const {
     return _sigma_anode_time_;
 }
 
-void calibrated_tracker_hit::set_sigma_anode_time(const double value) {
+void calibrated_tracker_hit::set_sigma_anode_time2(const double value) {
     _sigma_anode_time_ = value;
     return;
 }
