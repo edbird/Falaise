@@ -264,7 +264,7 @@ double calibrated_tracker_hit::get_sigma_top_cathode_time() const {
 }
 
 void calibrated_tracker_hit::set_sigma_top_cathode_time(const double value) {
-    _sigma_time_cathode_time_ = value;
+    _sigma_top_cathode_time_ = value;
 }
 
 double calibrated_tracker_hit::get_bottom_cathode_time() const {
