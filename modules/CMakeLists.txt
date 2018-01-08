@@ -22,6 +22,7 @@ set(_falaise_PLUGINS
   VisuToy
   EventBrowser
   things2root
+  #TestModule
 )
 
 # - Process modules here:
