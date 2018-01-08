@@ -219,6 +219,31 @@ public:
     /// Shortcut for the smart print method
     void dump() const;
 
+    double get_anode_time() const;
+    
+    void set_anode_time(const double value);
+    
+    double get_sigma_anode_time() const;    
+    
+    void set_sigma_anode_time(const double value);
+
+    double get_top_cathode_time() const;
+    
+    void set_top_cathode_time(const double value);
+    
+    double get_sigma_top_cathode_time() const;    
+    
+    void set_sigma_top_cathode_time(const double value);
+
+    double get_bottom_cathode_time() const;
+    
+    void set_bottom_cathode_time(const double value);
+    
+    double get_sigma_bottom_cathode_time() const;    
+    
+    void set_sigma_bottom_cathode_time(const double value);
+
+    
 protected:
     /// Set the X position of the center of the cell in the module coordinates system
     void _set_x(double);

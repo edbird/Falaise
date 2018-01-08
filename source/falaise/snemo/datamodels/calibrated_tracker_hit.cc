@@ -232,6 +232,59 @@ void calibrated_tracker_hit::set_sigma_r(double sigma_r_) {
     return;
 }
 
+double calibrated_tracker_hit::get_anode_time() const {
+    return _anode_time_;
+}
+
+void calibrated_tracker_hit::set_anode_time(const double value) {
+    _anode_time_ = value;
+    return;
+}
+
+double calibrated_tracker_hit::get_sigma_anode_time() const {
+    return _sigma_anode_time_;
+}
+
+void calibrated_tracker_hit::set_sigma_anode_time(const double value) {
+    _sigma_anode_time_ = value;
+    return;
+}
+
+double calibrated_tracker_hit::get_top_cathode_time() const {
+    return _top_cathode_time_;
+}
+
+void calibrated_tracker_hit::set_top_cathode_time(const double value) {
+    _top_cathode_time_ = value;
+    return;
+}
+
+double calibrated_tracker_hit::get_sigma_top_cathode_time() const {
+    return _sigma_top_cathode_time_;
+}
+
+void calibrated_tracker_hit::set_sigma_top_cathode_time(const double value) {
+    _sigma_time_cathode_time_ = value;
+}
+
+double calibrated_tracker_hit::get_bottom_cathode_time() const {
+    return _bottom_cathode_time_;
+}
+
+void calibrated_tracker_hit::set_bottom_cathode_time(const double value) {
+    _bottom_cathode_time_ = value;
+    return;
+}
+
+double calibrated_tracker_hit::get_sigma_bottom_cathode_time() const {
+    return _sigma_bottom_cathode_time_;
+}
+
+void calibrated_tracker_hit::set_sigma_bottom_cathode_time(const double value) {
+    _sigma_bottom_cathode_time_ = value;
+    return;
+}
+
 void calibrated_tracker_hit::invalidate_xy() {
     datatools::invalidate(_x_);
     datatools::invalidate(_y_);
