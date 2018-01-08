@@ -271,7 +271,7 @@ private:
     double _top_cathode_time_;
     double _sigma_top_cathode_time_;
     double _bottom_cathode_time_;
-    double _bottom_top_cathode_time_;
+    double _sigma_bottom_cathode_time_;
 
     DATATOOLS_SERIALIZATION_DECLARATION()
 };
