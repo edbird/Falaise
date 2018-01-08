@@ -240,6 +240,13 @@ private:
     double _y_;             //!< Y position of the anode wire within the module coordinates system
     double _delayed_time_;  //!< Delayed reference time
     double _delayed_time_error_;  //!< Delayed reference time error
+    
+    double _anode_time_;
+    double _sigma_anode_time_;
+    double _top_cathode_time_;
+    double _sigma_top_cathode_time_;
+    double _bottom_cathode_time_;
+    double _bottom_top_cathode_time_;
 
     DATATOOLS_SERIALIZATION_DECLARATION()
 };
