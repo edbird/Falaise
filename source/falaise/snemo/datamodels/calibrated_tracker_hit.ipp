@@ -56,6 +56,14 @@ void calibrated_tracker_hit::serialize(Archive& ar_, const unsigned int version_
         ar_& boost::serialization::make_nvp("delayed_time", _delayed_time_);
         ar_& boost::serialization::make_nvp("delayed_time_error", _delayed_time_error_);
     }
+    
+    // Version 2:
+    ar_& boost::serialization::make_nvp("anode_time", _anode_time_);
+    ar_& boost::serialization::make_nvp("sigma_anode_time", _sigma_anode_time_);
+    ar_& boost::serialization::make_nvp("top_cathode_time", _top_cathode_time_);
+    ar_& boost::serialization::make_nvp("sigma_top_cathode_time", _sigma_top_cathode_time_);
+    ar_& boost::serialization::make_nvp("bottom_cathode_time", _bottom_cathode_time_);
+    ar_& boost::serialization::make_nvp("bottom_top_cathode_time", _bottom_top_cathode_time_);
     return;
 }
 

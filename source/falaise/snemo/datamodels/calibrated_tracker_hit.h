@@ -262,7 +262,7 @@ struct compare_tracker_hit_by_delayed_time {
 
 // Class version:
 #include <boost/serialization/version.hpp>
-BOOST_CLASS_VERSION(snemo::datamodel::calibrated_tracker_hit, 1)
+BOOST_CLASS_VERSION(snemo::datamodel::calibrated_tracker_hit, 2)
 
 #endif  // FALAISE_SNEMO_DATAMODELS_CALIBRATED_TRACKER_HIT_H
 /*
