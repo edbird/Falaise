@@ -770,7 +770,7 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
             
             if(datatools::is_valid(the_raw_tracker_hit.get_sigma_drift_time())) {
                 //the_calibrated_tracker_hit.set_sigma_drift_time(the_raw_tracker_hit.get_sigma_drift_time());
-                the_calibrated_tracker_hit.set_sigma_anode_time2(the_raw_tracker_hit.get_drift_time());
+                the_calibrated_tracker_hit.set_sigma_anode_time2(the_raw_tracker_hit.get_sigma_drift_time());
             }
             else {
                 the_calibrated_tracker_hit.set_sigma_anode_time2(invalid);
