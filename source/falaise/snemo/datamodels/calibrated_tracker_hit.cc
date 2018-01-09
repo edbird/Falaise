@@ -310,6 +310,15 @@ calibrated_tracker_hit::calibrated_tracker_hit() : base_hit() {
     datatools::invalidate(_y_);
     datatools::invalidate(_delayed_time_);
     datatools::invalidate(_delayed_time_error_);
+    
+    datatools::invalidate(_anode_time_);
+    datatools::invalidate(_sigma_anode_time_);
+    datatools::invalidate(_top_cathode_time_);
+    datatools::invalidate(_sigma_top_cathode_time_);
+    datatools::invalidate(_bottom_cathode_time_);
+    datatools::invalidate(_sigma_bottom_cathode_time_);
+
+    
     return;
 }
 
