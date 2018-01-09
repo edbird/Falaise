@@ -699,28 +699,60 @@ void mock_tracker_s2c_module::_process_tracker_calibration(
 // typedef datatools::handle<calibrated_tracker_hit> snemo::datamodel::tracker_hit_handle_type
 // typedef datatools::handle<calibrated_tracker_hit> tracker_hit_handle_type
 
+
+            
+            //const snemo::datamodel::calibrated_data::tracker_hit_collection_type & THCT = CD.calibrated_tracker_hits();
+            //
+            //timestamp_.count = THCT.size();
+            //std::cout << "timestamp_.count = " << timestamp_.count << std::endl;
+            //
+            //for(int ix = 0; ix < timestamp_.count /*THCT.size()*/ /*hits_.nofhits_*/; ++ ix)
+            //{
+            //    const snemo::datamodel::calibrated_data::tracker_hit_handle_type & THHT = THCT.at(ix);
+            //    if(THHT.has_data())
+            //    {
+            //        const snemo::datamodel::calibrated_tracker_hit & CTH = THHT.get();
+            //        if(CTH.has_anode_time())
+            //        {
+            
+
+
 void mock_tracker_s2c_module::_process_tracker_timestamps(
     const mock_tracker_s2c_module::raw_tracker_hit_col_type& raw_tracker_hits_,
-    snemo::datamodel::calibrated_data::tracker_hit_collection_type& calibrated_tracker_hits_
-    /*std::vector<datatools::handle<calibrated_tracker_hit>>& calibrated_tracker_hits_*/) {
+    snemo::datamodel::calibrated_data::tracker_hit_collection_type& calibrated_tracker_hits_) {
     DT_LOG_DEBUG(get_logging_priority(), "Entering...");
 
     // Loop on raw tracker hits:
     raw_tracker_hit_col_type::const_iterator i = raw_tracker_hits_.begin();
-    // does not work ->
     snemo::datamodel::calibrated_data::tracker_hit_collection_type::iterator j = calibrated_tracker_hits_.begin();
+    
+    // does not work ->
+    //snemo::datamodel::calibrated_data::tracker_hit_collection_type::iterator j = calibrated_tracker_hits_.begin();
+    //snemo::datamodel::calibrated_data::tracker_hit_handle_type& the_tracker_hit_handle = calibrated_tracker_hits_.begin();
+    // if(the_tracker_hit_handle.has_data())
+    //snemo::datamodel::calibrated_tracker_hit& the_calibrated_tracker_hit = the_tracker_hit_handle.grab();
+    
+    
     //std::vector<datatools::handle<calibrated_tracker_hit>>::iterator j = calibrated_tracker_hits_.begin();
+    
+    
+    
+    
     for (; ; i++, ++ j) {
         
         // i != raw_tracker_hits_.end() && j != calibrated_tracker_hits_.end()
         if(i == raw_tracker_hits_.end()) break;
         if(j == calibrated_tracker_hits_.end()) break;
+        
+        //snemo::datamodel::calibrated_data::tracker_hit_handle_type& the_tracker_hit_handle = calibrated_tracker_hits_.begin();
+        //snemo::datamodel::calibrated_tracker_hit& the_calibrated_tracker_hit = the_tracker_hit_handle.grab();
+    
             
         // get a reference to the tracker hit:
         const snemo::datamodel::mock_raw_tracker_hit& the_raw_tracker_hit = *i;
 
         // get a reference to the calibrated tracker hit:
-        snemo::datamodel::calibrated_tracker_hit& the_calibrated_tracker_hit = *j;
+        snemo::datamodel::calibrated_tracker_hit& the_calibrated_tracker_hit = (*j).grab();
 
         // check if missing (calibrated) and if valid (raw)
 
@@ -728,7 +760,7 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
         datatools::invalidate(invalid);
         
         if(the_calibrated_tracker_hit.has_anode_time() == true) { // TODO double check this code
-            if(datatools::is_valid(the_raw_tracker_hit.get_drift_time()) {
+            if(datatools::is_valid(the_raw_tracker_hit.get_drift_time())) {
                 //the_calibrated_tracker_hit.set_drift_time(the_raw_tracker_hit.get_drift_time());
                 the_calibrated_tracker_hit.set_anode_time2(the_raw_tracker_hit.get_drift_time());
             }
@@ -736,7 +768,7 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
                 the_calibrated_tracker_hit.set_anode_time2(invalid);
             }
             
-            if(datatools::is_valid(the_raw_tracker_hit.get_sigma_drift_time()) {
+            if(datatools::is_valid(the_raw_tracker_hit.get_sigma_drift_time())) {
                 //the_calibrated_tracker_hit.set_sigma_drift_time(the_raw_tracker_hit.get_sigma_drift_time());
                 the_calibrated_tracker_hit.set_sigma_anode_time2(the_raw_tracker_hit.get_drift_time());
             }
@@ -751,15 +783,15 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
         }
         
         if(the_calibrated_tracker_hit.is_top_cathode_missing() == false) { // TODO double check this code
-            if(datatools::is_valid(the_raw_tracker_hit.get_top_cathode_time()) {
-                the_calibrated_tracker_hit.set_top_cathode_time(the_raw_tracker_hit.get_top_cathode_time());
+            if(datatools::is_valid(the_raw_tracker_hit.get_top_time())) {
+                the_calibrated_tracker_hit.set_top_cathode_time(the_raw_tracker_hit.get_top_time());
             }
             else {
                 the_calibrated_tracker_hit.set_top_cathode_time(invalid);
             }
             
-            if(datatools::is_valid(the_raw_tracker_hit.get_sigma_top_cathode_time()) {
-                the_calibrated_tracker_hit.set_sigma_top_cathode_time(the_raw_tracker_hit.get_sigma_top_cathode_time());
+            if(datatools::is_valid(the_raw_tracker_hit.get_sigma_top_time())) {
+                the_calibrated_tracker_hit.set_sigma_top_cathode_time(the_raw_tracker_hit.get_sigma_top_time());
             }
             else {
                 the_calibrated_tracker_hit.set_sigma_top_cathode_time(invalid);
@@ -772,15 +804,15 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
         }
         
         if(the_calibrated_tracker_hit.is_bottom_cathode_missing() == false) { // TODO double check this code
-            if(datatools::is_valid(the_raw_tracker_hit.get_bottom_cathode_time()) {
-                the_calibrated_tracker_hit.set_bottom_cathode_time(the_raw_tracker_hit.get_bottom_cathode_time());
+            if(datatools::is_valid(the_raw_tracker_hit.get_bottom_time())) {
+                the_calibrated_tracker_hit.set_bottom_cathode_time(the_raw_tracker_hit.get_bottom_time());
             }
             else {
                 the_calibrated_tracker_hit.set_bottom_cathode_time(invalid);
             }
             
-            if(datatools::is_valid(the_raw_tracker_hit.get_sigma_bottom_cathode_time()) {
-                the_calibrated_tracker_hit.set_sigma_bottom_cathode_time(the_raw_tracker_hit.get_sigma_bottom_cathode_time());
+            if(datatools::is_valid(the_raw_tracker_hit.get_sigma_bottom_time())) {
+                the_calibrated_tracker_hit.set_sigma_bottom_cathode_time(the_raw_tracker_hit.get_sigma_bottom_time());
             }
             else {
                 the_calibrated_tracker_hit.set_sigma_bottom_cathode_time(invalid);
@@ -791,7 +823,7 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
             the_calibrated_tracker_hit.set_bottom_cathode_time(invalid);
             the_calibrated_tracker_hit.set_sigma_bottom_cathode_time(invalid);
         }
-
+    }
 }
 
 void mock_tracker_s2c_module::_process(
