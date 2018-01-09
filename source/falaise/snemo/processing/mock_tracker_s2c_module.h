@@ -106,6 +106,11 @@ protected:
         const raw_tracker_hit_col_type& raw_tracker_hits_,
         snemo::datamodel::calibrated_data::tracker_hit_collection_type& calibrated_tracker_hits_);
 
+    /// Copy tracker timestamp values
+    void _process_tracker_timestamps(
+        const raw_tracker_hit_col_type& raw_tracker_hits_,
+        snemo::datamodel::calibrated_data::tracker_hit_collection_type& calibrated_tracker_hits_);
+
     /// Main process function
     void _process(
         const mctools::simulated_data& simulated_data_,

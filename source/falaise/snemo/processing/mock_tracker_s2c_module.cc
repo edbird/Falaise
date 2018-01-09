@@ -694,14 +694,22 @@ void mock_tracker_s2c_module::_process_tracker_calibration(
     return;
 }
 
+// typedef std::vector<tracker_hit_handle_type> snemo::datamodel::calibrated_data::tracker_hit_collection_type
+// typedef std::vector<tracker_hit_handle_type> tracker_hit_collection_type
+// typedef datatools::handle<calibrated_tracker_hit> snemo::datamodel::tracker_hit_handle_type
+// typedef datatools::handle<calibrated_tracker_hit> tracker_hit_handle_type
+
 void mock_tracker_s2c_module::_process_tracker_timestamps(
     const mock_tracker_s2c_module::raw_tracker_hit_col_type& raw_tracker_hits_,
-    snemo::datamodel::calibrated_data::tracker_hit_collection_type& calibrated_tracker_hits_) {
+    snemo::datamodel::calibrated_data::tracker_hit_collection_type& calibrated_tracker_hits_
+    /*std::vector<datatools::handle<calibrated_tracker_hit>>& calibrated_tracker_hits_*/) {
     DT_LOG_DEBUG(get_logging_priority(), "Entering...");
 
     // Loop on raw tracker hits:
     raw_tracker_hit_col_type::const_iterator i = raw_tracker_hits_.begin();
-    calibrated_tracker_hit_col_type::iterator j = calibrated_tracker_hits_.begin();
+    // does not work ->
+    snemo::datamodel::calibrated_data::tracker_hit_collection_type::iterator j = calibrated_tracker_hits_.begin();
+    //std::vector<datatools::handle<calibrated_tracker_hit>>::iterator j = calibrated_tracker_hits_.begin();
     for (; ; i++, ++ j) {
         
         // i != raw_tracker_hits_.end() && j != calibrated_tracker_hits_.end()
