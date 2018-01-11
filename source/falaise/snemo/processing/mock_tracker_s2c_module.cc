@@ -737,7 +737,9 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
     
     
     
-    
+    // TODO: this will not work if i and j do not have the same length
+    if(raw_tracker_hits_.size() != calibrated_tracker_hits_.size())
+        std::cout << "WARNING: raw_tracker_hits_.size() != calibrated_tracker_hits_.size()" << std::endl;
     for (; ; i++, ++ j) {
         
         // i != raw_tracker_hits_.end() && j != calibrated_tracker_hits_.end()
