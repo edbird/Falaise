@@ -405,6 +405,9 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
         const double anode_time = ionization_time + expected_drift_time;
         const double sigma_anode_time = _geiger_.get_sigma_anode_time(anode_time);
 
+        /*** Store the Plasma Propagation Time ***/
+        const double plasma_propagation_time = expected_drift_time;
+
         /*** Cathodes TDCs ***/
         const double cathode_efficiency = _geiger_.get_cathode_efficiency();
         double bottom_cathode_time;
@@ -466,6 +469,12 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
                 }
             }
 
+            // Store the plasma propagation time
+            if (datatools::is_valid(plasma_propagation_time)) {
+                new_raw_tracker_hit.set_plasma_propagation_time(plasma_propagation_time);
+            }
+
+            // Store anode time and cathode times
             if (datatools::is_valid(anode_time)) {
                 new_raw_tracker_hit.set_drift_time(anode_time);
                 new_raw_tracker_hit.set_sigma_drift_time(sigma_anode_time);
@@ -483,12 +492,18 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
             // This geom_id is already used by some previous tracker hit: we update this hit !
             snemo::datamodel::mock_raw_tracker_hit& some_raw_tracker_hit = *found;
 
+            // Store the plasma propagation time
+            if (datatools::is_valid(plasma_propagation_time)) {
+                some_raw_tracker_hit.set_plasma_propagation_time(plasma_propagation_time);
+            }
+
+            // Store anode time and cathode times
             if (datatools::is_valid(anode_time)) {
                 if (anode_time < some_raw_tracker_hit.get_drift_time()) {
                     // reset TDC infos for the current hit:
                     some_raw_tracker_hit.invalidate_times();
                     // update TDC infos:
-                    some_raw_tracker_hit.set_drift_time(anode_time);
+                    some_raw_tracker_hit.set_drift_time(anode_time); // TODO: note that the "drift time" variable has been set to the "anode time" - this is probably an error
                     some_raw_tracker_hit.set_sigma_drift_time(sigma_anode_time);
                     if (datatools::is_valid(top_cathode_time)) {
                         some_raw_tracker_hit.set_top_time(top_cathode_time);
@@ -575,6 +590,10 @@ void mock_tracker_s2c_module::_process_tracker_calibration(
         // the_raw_tracker_hit.get_hit_id());
         the_calibrated_tracker_hit.set_geom_id(gid);
 
+        // Get plasma propagation time
+        //const double plasma_propagation_time = the_raw_tracker_hit.get_plasma_propagation_time();
+        // NOTE: disabled due to unused variable warnings treated as errors
+
         // Use the anode time :
         const double anode_time = the_raw_tracker_hit.get_drift_time();
 
@@ -587,7 +606,7 @@ void mock_tracker_s2c_module::_process_tracker_calibration(
         if (datatools::is_valid(anode_time)) {
             if (anode_time <= _delayed_drift_time_threshold_) {
                 // Case of a normal/prompt hit :
-                _geiger_.calibrate_drift_radius_from_drift_time(anode_time, radius, sigma_radius);
+                _geiger_.calibrate_drift_radius_from_drift_time(anode_time, radius, sigma_radius); // TODO: does this function change the value of anode_time? - No it does not, however arg is not const.
                 the_calibrated_tracker_hit.set_anode_time(anode_time);
                 if (anode_time > _peripheral_drift_time_threshold_) {
                     DT_LOG_TRACE(get_logging_priority(), "Peripheral Geiger hit with anode time = "
@@ -694,28 +713,6 @@ void mock_tracker_s2c_module::_process_tracker_calibration(
     return;
 }
 
-// typedef std::vector<tracker_hit_handle_type> snemo::datamodel::calibrated_data::tracker_hit_collection_type
-// typedef std::vector<tracker_hit_handle_type> tracker_hit_collection_type
-// typedef datatools::handle<calibrated_tracker_hit> snemo::datamodel::tracker_hit_handle_type
-// typedef datatools::handle<calibrated_tracker_hit> tracker_hit_handle_type
-
-
-            
-            //const snemo::datamodel::calibrated_data::tracker_hit_collection_type & THCT = CD.calibrated_tracker_hits();
-            //
-            //timestamp_.count = THCT.size();
-            //std::cout << "timestamp_.count = " << timestamp_.count << std::endl;
-            //
-            //for(int ix = 0; ix < timestamp_.count /*THCT.size()*/ /*hits_.nofhits_*/; ++ ix)
-            //{
-            //    const snemo::datamodel::calibrated_data::tracker_hit_handle_type & THHT = THCT.at(ix);
-            //    if(THHT.has_data())
-            //    {
-            //        const snemo::datamodel::calibrated_tracker_hit & CTH = THHT.get();
-            //        if(CTH.has_anode_time())
-            //        {
-            
-
 
 void mock_tracker_s2c_module::_process_tracker_timestamps(
     const mock_tracker_s2c_module::raw_tracker_hit_col_type& raw_tracker_hits_,
@@ -761,6 +758,16 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
         double invalid;
         datatools::invalidate(invalid);
         
+        // TODO: add has_plasma_propagation_time to this code block
+        //if() {
+            if(datatools::is_valid(the_raw_tracker_hit.get_plasma_propagation_time())) {
+                the_calibrated_tracker_hit.set_plasma_propagation_time(the_raw_tracker_hit.get_plasma_propagation_time());
+            }
+            else {
+                the_calibrated_tracker_hit.set_plasma_propagation_time(invalid);
+            }
+        //}
+
         if(the_calibrated_tracker_hit.has_anode_time() == true) { // TODO double check this code
             if(datatools::is_valid(the_raw_tracker_hit.get_drift_time())) {
                 //the_calibrated_tracker_hit.set_drift_time(the_raw_tracker_hit.get_drift_time());

@@ -74,6 +74,10 @@ public:
 
     void set_sigma_bottom_time(double);
 
+    double get_plasma_propagation_time() const;
+
+    void set_plasma_propagation_time(double);
+
     void invalidate_ref_time();
 
     void invalidate_times();
@@ -111,6 +115,9 @@ private:
     double _sigma_top_time_;     //!< Top cathode signal drift time error
     double _bottom_time_;        //!< Bottom cathode signal drift time
     double _sigma_bottom_time_;  //!< Bottom cathode signal drift time error
+
+    // Plasma propagation time
+    double _plasma_propagation_time_; //!< Plasma propagation time
 
     // DATATOOLS_SERIALIZATION_DECLARATION();
 };

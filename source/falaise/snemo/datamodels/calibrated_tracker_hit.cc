@@ -285,6 +285,15 @@ void calibrated_tracker_hit::set_sigma_bottom_cathode_time(const double value) {
     return;
 }
 
+double calibrated_tracker_hit::get_plasma_propagation_time() const {
+    return _plasma_propagation_time_;
+}
+
+void calibrated_tracker_hit::set_plasma_propagation_time(const double value) {
+    _plasma_propagation_time_ = value;
+    return;
+}
+
 void calibrated_tracker_hit::invalidate_xy() {
     datatools::invalidate(_x_);
     datatools::invalidate(_y_);
@@ -318,6 +327,7 @@ calibrated_tracker_hit::calibrated_tracker_hit() : base_hit() {
     datatools::invalidate(_bottom_cathode_time_);
     datatools::invalidate(_sigma_bottom_cathode_time_);
 
+    datatools::invalidate(_plasma_propagation_time_);
     
     return;
 }

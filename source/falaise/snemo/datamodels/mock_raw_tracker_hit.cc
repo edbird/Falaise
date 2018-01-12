@@ -126,6 +126,15 @@ void mock_raw_tracker_hit::set_sigma_bottom_time(double sigma_bottom_time_) {
     return;
 }
 
+double mock_raw_tracker_hit::get_plasma_propagation_time() const {
+    return _plasma_propagation_time_;
+}
+
+void mock_raw_tracker_hit::set_plasma_propagation_time(double plasma_propagation_time_) {
+    _plasma_propagation_time_ = plasma_propagation_time_;
+    _store |= STORE_TIMES;
+}
+
 void mock_raw_tracker_hit::invalidate_times() {
     _drift_time_ = INVALID_VALUE;
     _bottom_time_ = INVALID_VALUE;
@@ -133,6 +142,7 @@ void mock_raw_tracker_hit::invalidate_times() {
     _sigma_drift_time_ = INVALID_VALUE;
     _sigma_bottom_time_ = INVALID_VALUE;
     _sigma_top_time_ = INVALID_VALUE;
+    _plasma_propagation_time_ = INVALID_VALUE;
     _store &= ~STORE_TIMES;
     return;
 }
@@ -146,6 +156,7 @@ mock_raw_tracker_hit::mock_raw_tracker_hit() : base_hit() {
     _sigma_drift_time_ = INVALID_VALUE;
     _sigma_bottom_time_ = INVALID_VALUE;
     _sigma_top_time_ = INVALID_VALUE;
+    _plasma_propagation_time_ = INVALID_VALUE;
     return;
 }
 

@@ -243,6 +243,9 @@ public:
     
     void set_sigma_bottom_cathode_time(const double value);
 
+    double get_plasma_propagation_time() const;
+
+    void set_plasma_propagation_time(const double value);
     
 protected:
     /// Set the X position of the center of the cell in the module coordinates system
@@ -273,6 +276,9 @@ private:
     double _bottom_cathode_time_;
     double _sigma_bottom_cathode_time_;
 
+    double _plasma_propagation_time_;
+    // TODO: sigma of this variable?
+
     DATATOOLS_SERIALIZATION_DECLARATION()
 };
 
@@ -287,7 +293,7 @@ struct compare_tracker_hit_by_delayed_time {
 
 // Class version:
 #include <boost/serialization/version.hpp>
-BOOST_CLASS_VERSION(snemo::datamodel::calibrated_tracker_hit, 2)
+BOOST_CLASS_VERSION(snemo::datamodel::calibrated_tracker_hit, 3)
 
 #endif  // FALAISE_SNEMO_DATAMODELS_CALIBRATED_TRACKER_HIT_H
 /*

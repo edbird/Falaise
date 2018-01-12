@@ -64,6 +64,10 @@ void calibrated_tracker_hit::serialize(Archive& ar_, const unsigned int version_
     ar_& boost::serialization::make_nvp("sigma_top_cathode_time", _sigma_top_cathode_time_);
     ar_& boost::serialization::make_nvp("bottom_cathode_time", _bottom_cathode_time_);
     ar_& boost::serialization::make_nvp("sigma_bottom_cathode_time", _sigma_bottom_cathode_time_);
+
+    // Version 3: Added plasma propagation time
+    ar_& boost::serialization::make_nvp("plasma_propagation_time", _plasma_propagation_time_);
+
     return;
 }
 
