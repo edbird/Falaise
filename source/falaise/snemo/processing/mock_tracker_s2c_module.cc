@@ -406,7 +406,8 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
         const double sigma_anode_time = _geiger_.get_sigma_anode_time(anode_time);
 
         /*** Store the Plasma Propagation Time ***/
-        const double plasma_propagation_time = expected_drift_time;
+        // This is wrong
+        //const double plasma_propagation_time = //expected_drift_time;
 
         /*** Cathodes TDCs ***/
         const double cathode_efficiency = _geiger_.get_cathode_efficiency();
@@ -420,9 +421,8 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
         if (r1 < cathode_efficiency) {
             const double l_bottom = longitudinal_position + 0.5 * _geiger_.get_cell_length();
             const double mean_bottom_cathode_time = l_bottom / _geiger_.get_plasma_longitudinal_speed();
-            const double sigma_bottom_cathode_time = 0.0;
-            bottom_cathode_time =
-                _get_random().gaussian(mean_bottom_cathode_time, sigma_bottom_cathode_time);
+            const double sigma_bottom_cathode_time = 0.0; // TODO
+            bottom_cathode_time = _get_random().gaussian(mean_bottom_cathode_time, sigma_bottom_cathode_time);
             if (bottom_cathode_time < 0.0) bottom_cathode_time = 0.0;
             missing_cathodes--;
         }
@@ -430,11 +430,17 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
         if (r2 < cathode_efficiency) {
             const double l_top = 0.5 * _geiger_.get_cell_length() - longitudinal_position;
             const double mean_top_cathode_time = l_top / _geiger_.get_plasma_longitudinal_speed();
-            const double sigma_top_cathode_time = 0.0;
+            const double sigma_top_cathode_time = 0.0; // TODO
             top_cathode_time = _get_random().gaussian(mean_top_cathode_time, sigma_top_cathode_time);
             if (top_cathode_time < 0.0) top_cathode_time = 0.0;
             missing_cathodes--;
         }
+
+        /*** Store the Plasma Propagation Time ***/
+        // top_cathode_time is relative to the anode time,
+        // pick either top or bottom, arbitary
+        // and use this as the PPT
+        const double plasma_propagation_time = top_cathode_time + bottom_cathode_time;
 
         // find if some tracker hit already uses this geom ID:
         geomtools::base_hit::has_geom_id_predicate pred_has_gid(gid);
