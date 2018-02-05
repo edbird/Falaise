@@ -246,6 +246,14 @@ public:
     double get_plasma_propagation_time() const;
 
     void set_plasma_propagation_time(const double value);
+
+    double get_longitudinal_position() const;
+
+    void set_longitudinal_position(const double value);
+
+    double get_sigma_longitudinal_position() const;
+
+    void set_sigma_longitudinal_position(const double value);
     
 protected:
     /// Set the X position of the center of the cell in the module coordinates system
