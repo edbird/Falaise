@@ -278,6 +278,9 @@ private:
 
     double _plasma_propagation_time_;
     // TODO: sigma of this variable?
+    
+    double _longitudinal_position_;
+    double _sigma_longitudinal_position_;
 
     DATATOOLS_SERIALIZATION_DECLARATION()
 };

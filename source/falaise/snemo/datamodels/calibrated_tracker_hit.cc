@@ -294,6 +294,26 @@ void calibrated_tracker_hit::set_plasma_propagation_time(const double value) {
     return;
 }
 
+// TODO: sigma
+
+double calibrated_tracker_hit::get_longitudinal_position() const {
+    return _longitudinal_position_;
+}
+
+void calibrated_tracker_hit::set_longitudinal_positione(const double value) {
+    _longitudinal_positione_ = value;
+    return;
+}
+
+double calibrated_tracker_hit::get_sigma_longitudinal_position() const {
+    return _sigma_longitudinal_position_;
+}
+
+void calibrated_tracker_hit::set_sigma_longitudinal_positione(const double value) {
+    _sigma_longitudinal_positione_ = value;
+    return;
+}
+
 void calibrated_tracker_hit::invalidate_xy() {
     datatools::invalidate(_x_);
     datatools::invalidate(_y_);

@@ -474,6 +474,11 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
                             true_tracker_truth_parent_track_id);
                 }
             }
+            
+            // Store the longitudian position
+            if(datatools::is_valid(longitudinal_position)) {
+                new_raw_tracker_hit.set_longitudinal_position(longitudinal_position);
+            }
 
             // Store the plasma propagation time
             if (datatools::is_valid(plasma_propagation_time)) {
@@ -498,6 +503,13 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
             // This geom_id is already used by some previous tracker hit: we update this hit !
             snemo::datamodel::mock_raw_tracker_hit& some_raw_tracker_hit = *found;
 
+            // TODO: what happens if found, but the times are INVALID?!
+
+            // Store the longitudian position
+            if(datatools::is_valid(longitudinal_position)) {
+                new_raw_tracker_hit.set_longitudinal_position(longitudinal_position);
+            }
+            
             // Store the plasma propagation time
             if (datatools::is_valid(plasma_propagation_time)) {
                 some_raw_tracker_hit.set_plasma_propagation_time(plasma_propagation_time);
@@ -764,7 +776,19 @@ void mock_tracker_s2c_module::_process_tracker_timestamps(
         double invalid;
         datatools::invalidate(invalid);
         
+        // TODO: add has_longitudinal_position to this code block
+        // TODO: add sigma
+        //if(() {
+            if(datatools::is_valid(the_raw_tracker_hit.get_longitudinal_position())) {
+                the_calibrated_tracker_hit.set_longitudinal_position(the_raw_tracker_hit.get_longitudinal_position());
+            }
+            else {
+                the_calibrated_tracker_hit.set_longitudinal_position(invalid);
+            }
+        //}
+        
         // TODO: add has_plasma_propagation_time to this code block
+        // TODO: add sigma
         //if() {
             if(datatools::is_valid(the_raw_tracker_hit.get_plasma_propagation_time())) {
                 the_calibrated_tracker_hit.set_plasma_propagation_time(the_raw_tracker_hit.get_plasma_propagation_time());

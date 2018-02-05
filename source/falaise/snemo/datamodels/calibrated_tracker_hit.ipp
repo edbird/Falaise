@@ -67,6 +67,11 @@ void calibrated_tracker_hit::serialize(Archive& ar_, const unsigned int version_
 
     // Version 3: Added plasma propagation time
     ar_& boost::serialization::make_nvp("plasma_propagation_time", _plasma_propagation_time_);
+    // TODO: sigma
+
+    // Version 4: Added longitudinal position
+    ar_& boost::serialization::make)nvp("longitudinal_position", _longitudinal_position_);
+    ar_& boost::serialization::make)nvp("sigma_longitudinal_position", _sigma_longitudinal_position_);
 
     return;
 }
