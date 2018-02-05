@@ -77,6 +77,18 @@ public:
     double get_plasma_propagation_time() const;
 
     void set_plasma_propagation_time(double);
+    
+    double get_sigma_plasma_propagation_time() const;
+    
+    void set_sigma_plasma_propagation_time(double);
+    
+    double get_longitudinal_position() const;
+    
+    void set_longitudinal_position(double);
+    
+    double get_sigma_longitudinal_position() const;
+    
+    void set_sigma_longitudinal_position(double);
 
     void invalidate_ref_time();
 
@@ -116,8 +128,12 @@ private:
     double _bottom_time_;        //!< Bottom cathode signal drift time
     double _sigma_bottom_time_;  //!< Bottom cathode signal drift time error
 
+    double _longitudinal_position_;
+    double _sigma_longitudinal_position_;
+
     // Plasma propagation time
     double _plasma_propagation_time_; //!< Plasma propagation time
+    double _sigma_plasma_propagation_time_;
 
     // DATATOOLS_SERIALIZATION_DECLARATION();
 };

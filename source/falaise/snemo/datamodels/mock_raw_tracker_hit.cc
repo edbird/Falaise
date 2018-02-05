@@ -126,12 +126,41 @@ void mock_raw_tracker_hit::set_sigma_bottom_time(double sigma_bottom_time_) {
     return;
 }
 
+double mock_raw_tracker_hit::get_longitudinal_position() const {
+    return _longitudinal_position_;
+}
+
+void mock_raw_tracker_hit::set_longitudinal_position(double longitudinal_position_) {
+    _longitudinal_position_ = longitudinal_position_;
+    _store |= STORE_TIMES;
+    return;
+}
+
+double mock_raw_tracker_hit::get_sigma_longitudinal_position() const {
+    return _sigma_longitudinal_position_;
+}
+
+void mock_raw_tracker_hit::set_sigma_longitudinal_position(double sigma_longitudinal_position_) {
+    _sigma_longitudinal_position_ = sigma_longitudinal_position_;
+    _store |= STORE_TIMES;
+    return;
+}
+
 double mock_raw_tracker_hit::get_plasma_propagation_time() const {
     return _plasma_propagation_time_;
 }
 
 void mock_raw_tracker_hit::set_plasma_propagation_time(double plasma_propagation_time_) {
     _plasma_propagation_time_ = plasma_propagation_time_;
+    _store |= STORE_TIMES;
+}
+
+double mock_raw_tracker_hit::get_sigma_plasma_propagation_time() const {
+    return _sigma_plasma_propagation_time_;
+}
+
+void mock_raw_tracker_hit::set_sigma_plasma_propagation_time(double sigma_plasma_propagation_time_) {
+    _sigma_plasma_propagation_time_ = sigma_plasma_propagation_time_;
     _store |= STORE_TIMES;
 }
 
