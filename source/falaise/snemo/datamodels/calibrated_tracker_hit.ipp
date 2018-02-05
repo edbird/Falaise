@@ -70,8 +70,8 @@ void calibrated_tracker_hit::serialize(Archive& ar_, const unsigned int version_
     // TODO: sigma
 
     // Version 4: Added longitudinal position
-    ar_& boost::serialization::make)nvp("longitudinal_position", _longitudinal_position_);
-    ar_& boost::serialization::make)nvp("sigma_longitudinal_position", _sigma_longitudinal_position_);
+    ar_& boost::serialization::make_nvp("longitudinal_position", _longitudinal_position_);
+    ar_& boost::serialization::make_nvp("sigma_longitudinal_position", _sigma_longitudinal_position_);
 
     return;
 }

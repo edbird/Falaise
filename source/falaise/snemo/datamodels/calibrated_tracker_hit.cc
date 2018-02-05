@@ -300,8 +300,8 @@ double calibrated_tracker_hit::get_longitudinal_position() const {
     return _longitudinal_position_;
 }
 
-void calibrated_tracker_hit::set_longitudinal_positione(const double value) {
-    _longitudinal_positione_ = value;
+void calibrated_tracker_hit::set_longitudinal_position(const double value) {
+    _longitudinal_position_ = value;
     return;
 }
 
@@ -309,8 +309,8 @@ double calibrated_tracker_hit::get_sigma_longitudinal_position() const {
     return _sigma_longitudinal_position_;
 }
 
-void calibrated_tracker_hit::set_sigma_longitudinal_positione(const double value) {
-    _sigma_longitudinal_positione_ = value;
+void calibrated_tracker_hit::set_sigma_longitudinal_position(const double value) {
+    _sigma_longitudinal_position_ = value;
     return;
 }
 

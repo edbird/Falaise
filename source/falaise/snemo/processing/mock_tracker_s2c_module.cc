@@ -507,7 +507,7 @@ void mock_tracker_s2c_module::_process_tracker_digitization(
 
             // Store the longitudian position
             if(datatools::is_valid(longitudinal_position)) {
-                new_raw_tracker_hit.set_longitudinal_position(longitudinal_position);
+                some_raw_tracker_hit.set_longitudinal_position(longitudinal_position);
             }
             
             // Store the plasma propagation time
