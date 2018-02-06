@@ -669,6 +669,7 @@ void mock_tracker_s2c_module::_process_tracker_calibration(
             the_calibrated_tracker_hit.set_bottom_cathode_missing(true);
         } else if (!datatools::is_valid(t1) && datatools::is_valid(t2)) {
             // missing bottom cathode signal:
+            // const double mean_z 0.5 * L - t2 * V
             missing_cathodes = 1;
             const double mean_z = 0.5 * _geiger_.get_cell_length() - t2 * plasma_propagation_speed;
             sigma_z = _geiger_.get_sigma_z(mean_z, missing_cathodes);
@@ -676,6 +677,7 @@ void mock_tracker_s2c_module::_process_tracker_calibration(
             the_calibrated_tracker_hit.set_bottom_cathode_missing(true);
         } else if (datatools::is_valid(t1) && !datatools::is_valid(t2)) {
             // missing top cathode signal:
+            // const double mean_z = t1 * V - 0.5 * L
             missing_cathodes = 1;
             const double mean_z = t1 * plasma_propagation_speed - 0.5 * _geiger_.get_cell_length();
             sigma_z = _geiger_.get_sigma_z(mean_z, missing_cathodes);
@@ -683,6 +685,8 @@ void mock_tracker_s2c_module::_process_tracker_calibration(
             the_calibrated_tracker_hit.set_top_cathode_missing(true);
         } else {
             missing_cathodes = 0;
+            // TODO: equlvalent to:
+            // const double mean_z = L * (0.5 - t2 / (t1 + t2))
             const double plasma_propagation_speed_2 = _geiger_.get_cell_length() / (t1 + t2);
             const double mean_z = 0.5 * _geiger_.get_cell_length() - t2 * plasma_propagation_speed_2;
             sigma_z = _geiger_.get_sigma_z(mean_z, missing_cathodes);
