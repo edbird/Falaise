@@ -22,7 +22,7 @@ can be used too.
 
 # Getting Falaise
 ## Quickstart
-We recommend installing Falaise and its requirements as documented on our [fork of Homebrew](https://github.com/SuperNEMO-DBD/brew).
+We recommend installing Falaise and its requirements as documented on our [fork of Homebrew](https://github.com/SuperNEMO-DBD/brew). (You may need to run `brew update` and `brew upgrade` to insure all dependencies are up-to-date before continuing.)
 Build-from-source and [Docker](https://www.docker.com)/[Singularity](https://www.sylabs.io/singularity/)
 Image installs are available, both providing a complete suite of software and tools for using and developing Falaise and extension modules.
 
